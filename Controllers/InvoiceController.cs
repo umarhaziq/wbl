@@ -19,7 +19,7 @@ namespace wbl.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Invoicess.ToListAsync());
-           
+
 
         }
 
@@ -42,7 +42,7 @@ namespace wbl.Controllers
         }
 
         // GET: Invoice/Create
-       
+
 
         public async Task<IActionResult> Create()
         {
@@ -54,7 +54,7 @@ namespace wbl.Controllers
                 })
                 .ToListAsync();
 
-          
+
             ViewBag.Children = new SelectList(approvedChildren, "ChildId", "ChildName");
 
             return View();
