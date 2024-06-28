@@ -1,0 +1,50 @@
+﻿@* @model wbl.Models.Invoices
+
+@{
+    ViewData["Title"] = "Invoice Details";
+}
+
+<h1>Invoice Details</h1>
+
+<div>
+    <h4>Invoices</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Number
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Number
+        </dd>
+        <dt class="col-sm-2">
+            Date
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Date.ToShortDateString()
+        </dd>
+        <dt class="col-sm-2">
+            Value
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Value
+        </dd>
+@*         <dt class="col-sm-2">
+            Attachment
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Attachment != null)
+            {
+                <a href="@Url.Action("DownloadAttachment", "Invoice", new { id = Model.Id })" class="btn btn-info">Download Attachment</a>
+            }
+            else
+            {
+                <span>No attachment available</span>
+            }
+        </dd> *@
+  @*   </dl>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+ *@

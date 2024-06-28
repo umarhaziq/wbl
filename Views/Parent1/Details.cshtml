@@ -1,0 +1,123 @@
+﻿@model ParentViewModel
+
+@{
+    ViewData["Title"] = "Parent Details";
+}
+
+<style>
+    /* Tooltip style */
+    .tooltip-inner {
+        max-width: 100%;
+        text-align: left;
+        padding: 10px;
+    }
+
+    /* Styling for expanding details */
+    .details-card {
+        transition: all 0.3s ease;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+    }
+
+        .details-card.show {
+            opacity: 1;
+            max-height: 1000px; /* Adjust as needed for maximum expansion height */
+        }
+</style>
+
+<script>
+    // Function to show/hide details on hover
+    function toggleDetails(detailsId, show) {
+        var details = document.getElementById(detailsId);
+        if (show) {
+            details.classList.add('show');
+        } else {
+            details.classList.remove('show');
+        }
+    }
+
+    // Function to set tooltip content dynamically
+    function setTooltipContent(element, content) {
+        element.setAttribute('data-bs-original-title', content);
+    }
+</script>
+
+<div class="row justify-content-center mb-4">
+    <div class="col-md-8 text-center">
+        <button class="btn btn-outline-primary mx-2"
+                onmouseover="toggleDetails('father-details', true)"
+                onmouseout="toggleDetails('father-details', false)"
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                title="Hover to view Father's details">
+            Father Details
+        </button>
+        <button class="btn btn-outline-primary mx-2"
+                onmouseover="toggleDetails('mother-details', true)"
+                onmouseout="toggleDetails('mother-details', false)"
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                title="Hover to view Mother's details">
+            Mother Details
+        </button>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div id="father-details" class="col-lg-5 col-md-10 col-sm-12 mb-4 details-card">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title text-center">Father's Details</h5>
+                <hr />
+                @if (!string.IsNullOrEmpty(Model.FatherName) || !string.IsNullOrEmpty(Model.FatherEmail))
+                {
+                    <p><strong>Full Name:</strong> @Model.FatherName</p>
+                    <p><strong>Email:</strong> @Model.FatherEmail</p>
+                    <p><strong>IC Number:</strong> @Model.FatherIc</p>
+                    <p><strong>Phone Number:</strong> @Model.FatherPhone</p>
+                    <p><strong>Address:</strong> @Model.FatherAddress</p>
+                    <p><strong>Race:</strong> @Model.FatherRace</p>
+                    <p><strong>Occupation:</strong> @Model.FatherOccupation</p>
+                    <p><strong>Work Address:</strong> @Model.FatherWorkAddress</p>
+                }
+                else
+                {
+                    <p class="text-muted text-center">No details available for Father.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div id="mother-details" class="col-lg-5 col-md-10 col-sm-12 mb-4 details-card">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title text-center">Mother's Details</h5>
+                <hr />
+                @if (!string.IsNullOrEmpty(Model.MotherName) || !string.IsNullOrEmpty(Model.MotherEmail))
+                {
+                    <p><strong>Full Name:</strong> @Model.MotherName</p>
+                    <p><strong>Email:</strong> @Model.MotherEmail</p>
+                    <p><strong>IC Number:</strong> @Model.MotherIc</p>
+                    <p><strong>Phone Number:</strong> @Model.MotherPhone</p>
+                    <p><strong>Address:</strong> @Model.MotherAddress</p>
+                    <p><strong>Race:</strong> @Model.MotherRace</p>
+                    <p><strong>Occupation:</strong> @Model.MotherOccupation</p>
+                    <p><strong>Work Address:</strong> @Model.MotherWorkAddress</p>
+                }
+                else
+                {
+                    <p class="text-muted text-center">No details available for Mother.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Enable tooltips everywhere
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+}

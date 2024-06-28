@@ -1,0 +1,14 @@
+﻿@model wbl.Models.CustomerService
+
+<h1>Customer Service Details</h1>
+
+<div>
+    <h4>Name: @Html.DisplayFor(model => model.Name)</h4>
+    <h4>Email: @Html.DisplayFor(model => model.Email)</h4>
+    <h4>Phone: @Html.DisplayFor(model => model.Phone)</h4>
+    <h4>Status: @Html.DisplayFor(model => model.Status)</h4>
+</div>
+
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>

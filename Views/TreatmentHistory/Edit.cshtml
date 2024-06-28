@@ -1,0 +1,39 @@
+﻿@model wbl.Models.ViewModels.TreatmentHistoryViewModel
+
+@{
+    ViewData["Title"] = "Edit Treatment History";
+}
+
+<h2>Edit Treatment History</h2>
+
+<form asp-action="Edit">
+    <div class="form-group">
+        <label asp-for="Pediatricians" class="control-label"></label>
+        <input asp-for="Pediatricians" class="form-control" />
+        <span asp-validation-for="Pediatricians" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RecHospClinic" class="control-label"></label>
+        <input asp-for="RecHospClinic" class="form-control" />
+        <span asp-validation-for="RecHospClinic" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiagnoseDesc" class="control-label"></label>
+        <input asp-for="DiagnoseDesc" class="form-control" />
+        <span asp-validation-for="DiagnoseDesc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DeadlineDiagnose" class="control-label"></label>
+        <input asp-for="DeadlineDiagnose" class="form-control" />
+        <span asp-validation-for="DeadlineDiagnose" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="ChildId" />
+    <input type="hidden" asp-for="historyId" />
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" asp-route-ChildId="@Model.ChildId">Back to List</a>
+</div>

@@ -1,0 +1,38 @@
+﻿@model Session
+
+@{
+    ViewBag.Title = "Register Session";
+}
+
+<h1>Register Session</h1>
+
+<form asp-action="RegisterSession">
+    <input type="hidden" name="patientId" value="@ViewBag.PatientId" />
+    <input type="hidden" name="selectedDate" value="@ViewBag.SelectedDate" />
+
+    <label for="therapistId">Therapist</label>
+    <select id="therapistId" name="therapistId">
+        @foreach (var therapist in ViewBag.Therapists)
+        {
+            <option value="@therapist.TherapistId">@therapist.Name</option>
+        }
+    </select>
+
+    <label for="timeId">Time</label>
+    <select id="timeId" name="timeId">
+        @foreach (var time in ViewBag.SessionTimes)
+        {
+            <option value="@time.TimeId">@time.TimeStart - @time.TimeEnd</option>
+        }
+    </select>
+
+    <label for="staffId">Staff</label>
+    <select id="staffId" name="staffId">
+        @foreach (var staff in ViewBag.Staffs)
+        {
+            <option value="@staff.StaffId">@staff.Name</option>
+        }
+    </select>
+
+    <button type="submit">Register</button>
+</form>

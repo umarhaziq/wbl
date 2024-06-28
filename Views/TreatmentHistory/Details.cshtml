@@ -1,0 +1,19 @@
+﻿@model wbl.Models.TreatmentHistory
+
+<h1>Treatment History Details</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">History ID</dt>
+    <dd class="col-sm-10">@Model.historyId</dd>
+
+    <dt class="col-sm-2">Child Name</dt>
+    <dd class="col-sm-10">@Model.Child.Child_Name</dd>
+
+    <dt class="col-sm-2">Pediatricians</dt>
+    <dd class="col-sm-10">@Model.pediatricians</dd>
+
+    <dt class="col-sm-2">RecHospClinic</dt>
+    <dd class="col-sm-10">@Model.recHospClinic</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>

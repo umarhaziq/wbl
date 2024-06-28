@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Admin Dashboard</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Manage Programs</div>
+                <div class="card-body">
+                    <p class="card-text">Create, edit, or delete programs.</p>
+                    <a href="@Url.Action("Index", "Program")" class="btn btn-light">Manage Programs</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Manage Admin</div>
+                <div class="card-body">
+                    <p class="card-text">Add, edit, or delete Admin.</p>
+                    <a href="@Url.Action("ListAdmin", "Admin")" class="btn btn-light">Manage Admin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Manage Therapist</div>
+                <div class="card-body">
+                    <p class="card-text">Add, edit, or delete Therapist.</p>
+                    <a href="@Url.Action("ListTherapist", "Therapist")" class="btn btn-light">Manage Therapist</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Announcements</div>
+                <div class="card-body">
+                    <p class="card-text">Create and manage announcements.</p>
+                    <a href="@Url.Action("Index", "Announcement")" class="btn btn-light">Manage Announcements</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Manage Customer Services</div>
+                <div class="card-body">
+                    <p class="card-text">Add, edit, or delete Customer Services.</p>
+                    <a href="@Url.Action("Index", "CustomerService")" class="btn btn-light">Manage Customer Services</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Manage Child Approval</div>
+                <div class="card-body">
+                    <p class="card-text">View and approve child applications.</p>
+                    <a href="@Url.Action("ChildApproval", "Child")" class="btn btn-light">Manage Child Approval</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

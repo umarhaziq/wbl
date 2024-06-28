@@ -1,0 +1,33 @@
+﻿@model IEnumerable<wbl.Models.Child>
+
+@{
+    ViewData["Title"] = "Manage Child Approvals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Manage Child Approvals</h2>
+
+    <div class="card-deck">
+        @foreach (var child in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">@child.Child_Name</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Child IC:</strong> @child.Child_IC</p>
+                    <p class="card-text"><strong>Birthplace:</strong> @child.Child_Birthplace</p>
+                    <p class="card-text"><strong>Date of Birth:</strong> @child.Child_DOB.ToString("yyyy-MM-dd")</p>
+                    <p class="card-text"><strong>Gender:</strong> @child.Child_Gender</p>
+                    <p class="card-text"><strong>Nationality:</strong> @child.Child_Nationality</p>
+                    <p class="card-text"><strong>Race:</strong> @child.Child_Race</p>
+                    <p class="card-text"><strong>Religion:</strong> @child.Child_Religion</p>
+                    <p class="card-text"><strong>Program:</strong> @child.Programs.ProgramName</p>
+                    <a href="@Url.Action("ApproveChild", "Admin", new { id = child.ChildId })" class="btn btn-success">Approve</a>
+                    <a href="@Url.Action("RejectChild", "Admin", new { id = child.ChildId })" class="btn btn-danger">Reject</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@using System.Collections.Generic
+@model List<wbl.Models.Availibility>
+
+<h1>Select Available Day</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var availability in Model)
+        {
+            <tr>
+
+                <td>@availability.AvailableDate.ToShortDateString()</td>
+
+                <td>
+                    <form asp-action="SelectDay">
+                        <input type="hidden" name="patientId" value="1" />
+                        <input type="hidden" name="selectedDate" value="@availability.AvailableDate" />
+                        <button type="submit">Select</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

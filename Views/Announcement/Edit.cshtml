@@ -1,0 +1,56 @@
+﻿@model wbl.Models.Announcement
+
+@{
+    ViewData["Title"] = "Edit Announcement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <div class="card shadow">
+        <div class="card-header">
+            <h4 class="card-title">Announcement Details</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" asp-route-id="@Model.Id" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Title" class="form-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Content" class="form-label"></label>
+                    <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ImagePath" class="form-label"></label>
+                    <input type="file" asp-for="ImagePath" class="form-control-file" />
+                    @if (Model.ImagePath != null)
+                    {
+                        <div class="mt-2">
+                            <img src="@Url.Content(Model.ImagePath)" alt="Current Image" class="img-thumbnail" style="width: 200px;">
+                        </div>
+                    }
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a asp-action="Index" class="btn btn-secondary ml-2">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

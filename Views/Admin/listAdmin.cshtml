@@ -1,0 +1,48 @@
+﻿@model List<ApplicationUser>
+
+@{
+    ViewData["Title"] = "List of Admins";
+    var numberOfAdmins = ViewBag.NumberOfAdmins;
+}
+
+<h1 class="text-center">List of Admins</h1>
+
+
+<div class="container mt-4">
+    <p class="text-primary">Number of Admins: @numberOfAdmins</p>
+    <p>
+        <a asp-action="AddAdmin" asp-controller="Admin" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create New</a>
+    </p>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Full Name</th>
+                        <th>Create Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var admin in Model)
+                    {
+                        <tr>
+                            <td>@admin.Id</td>
+                            <td>@admin.Email</td>
+                            <td>@admin.FullName</td>
+                            <td>@admin.CreatedAt</td>
+                            <td>
+                                <a asp-action="EditAdmin" asp-route-id="@admin.Id" class="btn btn-info">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@admin.Id" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

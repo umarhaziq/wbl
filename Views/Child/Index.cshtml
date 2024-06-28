@@ -1,0 +1,78 @@
+﻿@model IEnumerable<wbl.Models.Child>
+
+@{
+    ViewData["Title"] = "Children List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Children List</h2>
+
+    <p>
+        <a asp-action="Create" class="btn btn-success">Create New</a>
+    </p>
+
+    <div class="card-deck">
+        @foreach (var item in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">@item.Child_Name</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Child IC:</strong> @item.Child_IC</p>
+                    <p class="card-text"><strong>Birthplace:</strong> @item.Child_Birthplace</p>
+                    <p class="card-text"><strong>Date of Birth:</strong> @item.Child_DOB.ToString("yyyy-MM-dd")</p>
+                    <p class="card-text"><strong>Gender:</strong> @item.Child_Gender</p>
+                    <p class="card-text"><strong>Nationality:</strong> @item.Child_Nationality</p>
+                    <p class="card-text"><strong>Race:</strong> @item.Child_Race</p>
+                    <p class="card-text"><strong>Religion:</strong> @item.Child_Religion</p>
+                    <p class="card-text"><strong>Program:</strong> @item.Programs?.ProgramName</p>
+                    <p class="card-text"><strong>Program:</strong> @item.Programs?.Price</p>
+                    <p class="card-text">
+                        <strong>Application Status:</strong>
+                        <span class="@{
+                            switch (item.ApplicationStatus)
+                            {
+                                case "Pending":
+                                        @:status-pending
+                                    break;
+                                case "Approved":
+                                        @:status-approved
+                                    break;
+                                case "Rejected":
+                                        @:status-rejected
+                                    break;
+                                default:
+                                        @:status-unknown
+                                    break;
+                            }
+                        }">
+                            @item.ApplicationStatus
+                        </span>
+                    </p>
+                    <p class="card-text">
+                        <strong>Payment Status:</strong>
+                        <span class="@{
+                            switch (item.PaymentStatus)
+                            {
+                                case "Paid":
+                                            @:status-paid
+                                    break;
+                                case "Unpaid":
+                                            @:status-unpaid
+                                    break;
+                                   
+                            }
+                        }">
+                            @item.PaymentStatus
+                        </span>
+                    </p>
+                    <a asp-action="Details" asp-route-id="@item.ChildId" class="btn btn-warning">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.ChildId" class="btn btn-info">Edit</a> |
+                    <a asp-action="Index" asp-controller="TreatmentHistory" asp-route-ChildId="@item.ChildId" class="btn btn-primary">Manage Treatment History</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

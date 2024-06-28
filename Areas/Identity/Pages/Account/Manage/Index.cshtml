@@ -1,0 +1,34 @@
+﻿@page
+@model wbl.Areas.Identity.Pages.Account.Manage.IndexModel
+@{
+    ViewData["Title"] = "Manage your account";
+    ViewData["ActivePage"] = "Index";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.StatusMessage))
+        {
+            <div class="alert alert-success" role="alert">
+                @Model.StatusMessage
+            </div>
+        }
+        <form method="post">
+            <h4>Your profile</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Username:</dt>
+                <dd class="col-sm-9">@Model.Username</dd>
+                <dt class="col-sm-3">Phone number:</dt>
+                <dd class="col-sm-9">
+                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </dd>
+            </dl>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>

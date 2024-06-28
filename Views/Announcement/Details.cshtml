@@ -1,0 +1,28 @@
+﻿@model wbl.Models.Announcement
+
+@{
+    ViewData["Title"] = "Announcement Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <div class="card shadow">
+        <div class="card-header">
+            <h4 class="card-title">@Model.Title</h4>
+        </div>
+        <div class="card-body">
+            <p>@Model.Content</p>
+            @if (!string.IsNullOrEmpty(Model.ImagePath))
+            {
+                <img src="@Url.Content(Model.ImagePath)" alt="Announcement Image" class="img-fluid mt-3" style="max-width: 100%; height: auto;" />
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

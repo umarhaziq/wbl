@@ -1,0 +1,60 @@
+﻿@model wbl.Models.Programs
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h1 class="card-title">Create Program</h1>
+                    <hr />
+
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="ProgramName" class="control-label">Name</label>
+                            <input asp-for="ProgramName" class="form-control mb-3" />
+                            <span asp-validation-for="ProgramName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label">Description</label>
+                            <input asp-for="Description" class="form-control mb-3" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Program_Category">Category</label>
+                            <select asp-for="Program_Category" class="form-control" id="Program_Category">
+                                <option value="">Select Category</option>
+                                <option value="Weekday">Weekday</option>
+                                <option value="Weekend">Weekend</option>
+                            </select>
+                            <span asp-validation-for="Program_Category" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label">Price</label>
+                            <input asp-for="Price" class="form-control mb-3" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

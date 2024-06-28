@@ -1,0 +1,299 @@
+﻿@model wbl.Models.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/wbl.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .card-header {
+            font-weight: bold;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .jumbotron {
+            background: #f8f9fa;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            border-radius: .3rem;
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            width: 5%;
+        }
+
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .carousel-control-prev-icon {
+            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/svgs/solid/chevron-left.svg');
+        }
+
+        .carousel-control-next-icon {
+            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/svgs/solid/chevron-right.svg');
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        @if (User.IsInRole("Admin") || User.IsInRole("Parent") || User.IsInRole("Therapist") || User.IsInRole("CustomerService"))
+        {
+            @if (User.IsInRole("Admin"))
+            {
+                <h2 class="mt-5 mb-4">Admin Dashboard</h2>
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Manage Programs</div>
+                            <div class="card-body">
+                                <p class="card-text">Create, edit, or delete programs.</p>
+                                <a href="@Url.Action("Index", "Program")" class="btn btn-primary">Manage Programs</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Manage Admin</div>
+                            <div class="card-body">
+                                <p class="card-text">Add, edit, or delete Admin.</p>
+                                <a href="@Url.Action("ListAdmin", "Admin")" class="btn btn-success">Manage Admin</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Manage Therapist</div>
+                            <div class="card-body">
+                                <p class="card-text">Add, edit, or delete Therapist.</p>
+                                <a href="@Url.Action("ListTherapist", "Therapist")" class="btn btn-info">Manage Therapist</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Manage Announcements</div>
+                            <div class="card-body">
+                                <p class="card-text">Create and manage announcements.</p>
+                                <a href="@Url.Action("Index", "Announcement")" class="btn btn-warning">Manage Announcements</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Manage Customer Services</div>
+                            <div class="card-body">
+                                <p class="card-text">Add, edit, or delete Customer Services.</p>
+                                <a href="@Url.Action("Index", "CustomerService")" class="btn btn-info">Manage Customer Services</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Manage Child Approval</div>
+                            <div class="card-body">
+                                <p class="card-text">View and approve child applications. <i class="bi bi-people"></i></p>
+                                @if (TempData["PendingApplicationsCount"] != null)
+                                {
+                                    <p class="alert alert-warning" role="alert">
+                                        You have @TempData["PendingApplicationsCount"] new child applications pending approval.
+                                    </p>
+                                }
+                                <a href="@Url.Action("ChildApproval", "Admin")" class="btn btn-dark">Manage Child Approval</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Manage Invoice</div>
+                            <div class="card-body">
+                                <p class="card-text">Add, edit, or delete Customer Services.</p>
+                                <a href="@Url.Action("Index", "Invoice")" class="btn btn-info">Manage Invoice</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (User.IsInRole("Parent"))
+            {
+                <h2 class="mt-5 mb-4">Parent Dashboard</h2>
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Register Parent Details</div>
+                            <div class="card-body">
+                                <p class="card-text">Register your details before applying for your child's therapy.</p>
+                                <a href="@Url.Action("Create", "Parent1")" class="btn btn-dark">Register Parent Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">Register Child</div>
+                            <div class="card-body">
+                                <p class="card-text">Register your child for a program.</p>
+                                <a href="@Url.Action("Create", "Child")" class="btn btn-primary">Register Child</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">View Child Details</div>
+                            <div class="card-body">
+                                <p class="card-text">View and update your child's details.</p>
+                                <a href="@Url.Action("Index", "Child")" class="btn btn-success">View Child Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">View Child's Report</div>
+                            <div class="card-body">
+                                <p class="card-text">View through your child's after session report</p>
+                                <a href="@Url.Action("ParentIndex", "Report")" class="btn btn-success">View Child Report</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">View Child's Payment</div>
+                            <div class="card-body">
+                                <p class="card-text">View through your child's payment</p>
+                                <a href="@Url.Action("Index", "ChildInvoice")" class="btn btn-success">View Child Report</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (User.IsInRole("Therapist"))
+            {
+                <h2 class="mt-5 mb-4">Therapist Dashboard</h2>
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">View Patient's Report</div>
+                            <div class="card-body">
+                                <p class="card-text">View through patient's after each session report</p>
+                                <a href="@Url.Action("Index", "Report")" class="btn btn-success">View Child Report</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (User.IsInRole("CustomerService"))
+            {
+                <h2 class="mt-5 mb-4">Customer Service Dashboard</h2>
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">View Child's Report</div>
+                            <div class="card-body">
+                                <p class="card-text">View through your child's after session report</p>
+                                <a href="@Url.Action("ParentIndex", "Report")" class="btn btn-success">View Child Report</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="jumbotron text-center">
+                <h1 class="display-4">Welcome to Autism Therapist</h1>
+                <p class="lead">Providing professional therapy services for children with autism.</p>
+                <a class="btn btn-primary btn-lg" href="@Url.Action("About", "Home")" role="button">Learn More</a>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-8">
+                    <h2 class="mb-4">Announcements</h2>
+                    <div id="announcementCarousel" class="carousel slide" data-ride="carousel">
+                        @* <div class="carousel-inner">
+                            @foreach (var announcement in Model.Announcements)
+                            {
+                                <div class="carousel-item @(announcement == Model.Announcements.First() ? "active" : "") d-flex justify-content-center align-items-center">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@announcement.Title</h5>
+                                            @if (!string.IsNullOrEmpty(announcement.ImagePath))
+                                            {
+                                                <img src="@Url.Content(announcement.ImagePath)" class="img-fluid" alt="Announcement Image">
+                                            }
+                                            <p class="card-text mt-3">@announcement.Content</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div> *@
+                        <div class="carousel-inner">
+                            @foreach (var announcement in Model.Announcements)
+                            {
+                                <div class="carousel-item @(announcement == Model.Announcements.First() ? "active" : "")">
+                                    <div class="card mb-4">
+                                        <div class="card-body text-center">
+                                            @if (!string.IsNullOrEmpty(announcement.ImagePath))
+                                            {
+                                                <img src="@Url.Content(announcement.ImagePath)" class="img-fluid" alt="Announcement Image">
+                                            }
+                                            <p class="card-text mt-3">@announcement.Content</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <!-- Controls -->
+                        <a class="carousel-control-prev" href="#announcementCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#announcementCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="mb-4">Quick Links</h2>
+                    <div class="list-group">
+                        <a href="@Url.Action("Programs", "Home")" class="list-group-item list-group-item-action">
+                            <h5 class="mb-1">Our Programs</h5>
+                            <p class="mb-1">Discover a variety of therapy programs tailored to meet your child's needs.</p>
+                        </a>
+                        <a href="@Url.Action("Therapists", "Home")" class="list-group-item list-group-item-action">
+                            <h5 class="mb-1">Meet Our Therapists</h5>
+                            <p class="mb-1">Learn more about our team of experienced therapists dedicated to helping your child.</p>
+                        </a>
+                        <a href="@Url.Action("SuccessStories", "Home")" class="list-group-item list-group-item-action">
+                            <h5 class="mb-1">Success Stories</h5>
+                            <p class="mb-1">Read about the success stories of our clients and how therapy has made a difference.</p>
+                        </a>
+                        <a href="@Url.Action("Announcements", "Home")" class="list-group-item list-group-item-action">
+                            <h5 class="mb-1">Announcements</h5>
+                            <p class="mb-1">Stay updated with the latest announcements and news from our center.</p>
+                        </a>
+                        <a href="@Url.Action("Contact", "Home")" class="list-group-item list-group-item-action">
+                            <h5 class="mb-1">Contact Us</h5>
+                            <p class="mb-1">Have questions? Get in touch with us for more information or to schedule an appointment.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model List<wbl.Models.ViewModels.TherapistViewModel>
+
+@{
+    ViewData["Title"] = "List of Therapists";
+    var numberOfTherapists = ViewBag.numberOfTherapists;
+}
+
+
+<h1 class="text-center">List of Therapist</h1>
+
+<div class="container mt-4">
+    <p>
+        <a asp-action="AddTherapist" asp-controller="Therapist" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Create New</a>
+    </p>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Specialization</th>
+                        <th>Experience Level</th>
+                        <th>Notes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Specialization)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ExperienceLevel)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Notes)</td>
+                            <td>
+                                <a asp-action="EditTherapist" asp-route-id="@item.TherapistId" class="btn btn-info">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.TherapistId" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

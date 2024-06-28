@@ -1,0 +1,10 @@
+﻿@model Availibility
+
+<h1>Set Availability</h1>
+
+<form asp-action="SetAvailability" method="post">
+    <input type="hidden" asp-for="TherapistId" />
+    <label for="availableDate">Available Date</label>
+    <input type="date" id="availableDate" name="availableDate" />
+    <button type="submit">Set</button>
+</form>

@@ -1,0 +1,48 @@
+﻿@model wbl.Models.ViewModels.TreatmentHistoryViewModel
+
+@{
+    ViewData["Title"] = "Add Treatment History";
+}
+
+<div class="container">
+
+    <h2>Add Treatment History</h2>
+
+    <form asp-action="Create" asp-controller="TreatmentHistory">
+        <div class="form-group">
+            <label asp-for="Pediatricians" class="control-label"></label>
+            <input asp-for="Pediatricians" class="form-control" />
+            <span asp-validation-for="Pediatricians" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="RecHospClinic" class="control-label"></label>
+            <input asp-for="RecHospClinic" class="form-control" />
+            <span asp-validation-for="RecHospClinic" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DiagnoseDesc" class="control-label"></label>
+            <input asp-for="DiagnoseDesc" class="form-control" />
+            <span asp-validation-for="DiagnoseDesc" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DeadlineDiagnose" class="control-label"></label>
+            <input asp-for="DeadlineDiagnose" class="form-control" />
+            <span asp-validation-for="DeadlineDiagnose" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="ChildId" />
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <div>
+        <a asp-action="Details" asp-controller="TreatmentHistory" asp-route-id="@Model.ChildId">Back to Details</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

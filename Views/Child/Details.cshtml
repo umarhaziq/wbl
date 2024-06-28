@@ -1,0 +1,53 @@
+﻿@model wbl.Models.Child
+
+@{
+    ViewData["Title"] = "Child Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+<h1>Details</h1>
+
+<div class="card shadow">
+    <div class="card-body">
+            <h4 class="card-title">Child Details</h4>
+        <hr />
+            <dl class="row">
+                <dt class="col-sm-2">Child IC</dt>
+                <dd class="col-sm-10">@Model.Child_IC</dd>
+
+                <dt class="col-sm-2">Child Name</dt>
+                <dd class="col-sm-10">@Model.Child_Name</dd>
+
+                <dt class="col-sm-2">Birthplace</dt>
+                <dd class="col-sm-10">@Model.Child_Birthplace</dd>
+
+                <dt class="col-sm-2">Date of Birth</dt>
+                <dd class="col-sm-10">@Model.Child_DOB.ToString("yyyy-MM-dd")</dd>
+
+                <dt class="col-sm-2">Gender</dt>
+                <dd class="col-sm-10">@Model.Child_Gender</dd>
+
+                <dt class="col-sm-2">Nationality</dt>
+                <dd class="col-sm-10">@Model.Child_Nationality</dd>
+
+                <dt class="col-sm-2">Race</dt>
+                <dd class="col-sm-10">@Model.Child_Race</dd>
+
+                <dt class="col-sm-2">Religion</dt>
+                <dd class="col-sm-10">@Model.Child_Religion</dd>
+
+                <dt class="col-sm-2">Program</dt>
+                <dd class="col-sm-10">@Model.Programs.ProgramName</dd>
+
+                <dt class="col-sm-2">Address</dt>
+                <dd class="col-sm-10">@Model.Child_Address</dd>
+            </dl>
+        
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" asp-route-id="@Model.ChildId" class="btn btn-warning">Edit</a>
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    </div>
+</div>
+</div>

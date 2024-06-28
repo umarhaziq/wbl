@@ -1,0 +1,41 @@
+﻿@model List<wbl.Models.TreatmentHistory>
+
+
+    <div class="container">
+        <h1>Treatment Histories for Child</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>History ID</th>
+                    <th>Child Name</th>
+                    <th>Pediatricians</th>
+                    <th>Diagnose Description</th>
+                    <th>Deadline Diagnose</th>
+                    <th>RecHospClinic</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var history in Model)
+                {
+                    <tr>
+                        <td>@history.historyId</td>
+                        <td>@history.Child.Child_Name</td>
+                        <td>@history.pediatricians</td>
+                        <td>@history.diagnoseDesc</td>
+                        <td>@history.deadlineDignose</td>
+                        <td>@history.recHospClinic</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@history.historyId" class="btn btn-primary">Details</a> |
+                            <a asp-action="Edit" asp-route-id="@history.historyId" class="btn btn-warning">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@history.historyId" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    <a asp-action="Create" asp-route-ChildId="@ViewBag.ChildId" class="btn btn-primary">Add</a>
+
+    </div>

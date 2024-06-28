@@ -1,0 +1,45 @@
+﻿@model wbl.Models.Invoices
+
+@{
+    ViewData["Title"] = "Create Invoice";
+}
+
+<h1>Create Invoice</h1>
+
+<h4>Invoices</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Select Child</label>
+                <select id="ChildId" asp-for="ChildId" class="form-control" asp-items="ViewBag.Children">
+                    <option value="">-- Select Child --</option>
+                </select>
+                <span asp-validation-for="ChildId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Date" class="control-label">Invoice Date</label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="InvoiceName" class="control-label">Invoice Date</label>
+                <input asp-for="InvoiceName" class="form-control" />
+                <span asp-validation-for="InvoiceName" class="text-danger"></span>
+            </div>
+
+
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
