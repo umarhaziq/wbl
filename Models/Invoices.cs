@@ -11,19 +11,19 @@ namespace wbl.Models
 
         public string InvoiceName { get; set; }
 
-        
+
 
         public DateTime Date { get; set; }
 
 
-        
+
 
         public int ChildId { get; set; }
 
         [ForeignKey("ChildId")]
         [ValidateNever]
 
-        public  Child Child{ get; set; }
+        public Child Child { get; set; }
 
 
 
@@ -31,7 +31,7 @@ namespace wbl.Models
 
         public string? AttachmentContentType { get; set; } // Add this property
 
-      
+
 
 
     }
