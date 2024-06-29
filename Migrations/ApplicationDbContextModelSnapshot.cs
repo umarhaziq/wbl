@@ -51,25 +51,25 @@ namespace wbl.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "50ad8c70-5405-4ec5-9597-962424b005cc",
+                            Id = "b9a015f7-159b-4a03-96d0-6a71691f9fa0",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "5617dfee-6988-4897-8aa1-5ab3b13a8c57",
+                            Id = "e4eb22e4-ed40-493c-bfc6-28c8e12b1dc7",
                             Name = "Parent",
                             NormalizedName = "Parent"
                         },
                         new
                         {
-                            Id = "2dc1da8c-92bc-4bbd-a7a3-5652cec40f02",
+                            Id = "661d3849-6fe1-4810-a739-cdf3a6341737",
                             Name = "CustomerService",
                             NormalizedName = "CustomerService"
                         },
                         new
                         {
-                            Id = "f443e085-44df-4f25-8864-704b0e14a940",
+                            Id = "c78f4969-47c6-40e4-9d6e-2e67a7105fa8",
                             Name = "Therapist",
                             NormalizedName = "Therapist"
                         });
@@ -498,6 +498,12 @@ namespace wbl.Migrations
 
                     b.Property<string>("InvoiceName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Receipt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ReceiptContentType")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

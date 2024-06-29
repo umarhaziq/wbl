@@ -1,0 +1,28 @@
+﻿@model wbl.Models.Invoices
+
+@{
+    ViewData["Title"] = "Upload Receipt";
+}
+
+<h1>Upload Receipt</h1>
+
+@* <h4>Invoice Number: @Model.Number</h4> *@
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Upload" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <label for="file" class="control-label">Select file</label>
+                <input type="file" name="file" class="form-control" />
+                <span asp-validation-for="Receipt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Upload" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

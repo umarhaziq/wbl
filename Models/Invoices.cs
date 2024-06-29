@@ -31,6 +31,10 @@ namespace wbl.Models
 
         public string? AttachmentContentType { get; set; } // Add this property
 
+        public byte[]? Receipt { get; set; }
+
+        public string? ReceiptContentType { get; set; } // Add this property
+
 
 
 

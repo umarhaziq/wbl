@@ -128,7 +128,7 @@ public class ChildController : Controller
                 FatherIc = viewModel.FatherIc,
                 Program_Category = viewModel.Program_Category,
                 ApplicationStatus = "Pending",
-                PaymentStatus = "Pending"
+                PaymentStatus = "Paid"
             };
 
             _context.Add(child);

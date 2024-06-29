@@ -1,4 +1,4 @@
-﻿@* @model List<wbl.Models.Invoices>
+﻿@model List<wbl.Models.Invoices>
 
 @{
     ViewData["Title"] = "Invoice List";
@@ -14,26 +14,33 @@
     <thead class="thead-dark">
         <tr>
             <th>Child Name</th>
-            <th>Child IC</th>
             <th>Program Name</th>
-            <th>Price</th>
+            <th>Program Price</th>
             <th>Payment Status</th>
+           @*  <th>Invoice Name</th> *@
+            <th>Invoice Date</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Child.Child_IC)</td>
                 <td>@Html.DisplayFor(modelItem => item.Child.Child_Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Programs.ProgramName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Programs.Price)</td>
+            @*     <td>@Html.DisplayFor(modelItem => item.Child.Child_IC)</td> *@
+                <td>@Html.DisplayFor(modelItem => item.Child.Programs.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Child.Programs.ProgramName)</td>
                 <td>@Html.DisplayFor(modelItem => item.Child.PaymentStatus)</td>
 
-                <td class="d-flex justify-content-around">
-                    <a asp-action="Upload" asp-route-id="@item.Id" class="btn btn-sm btn-info">Upload</a>
+                @* <td>@Html.DisplayFor(modelItem => item.InvoiceName)</td> *@
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                
 
-                    <a asp-action="ViewPDF" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-warning">View PDF</a>
+                <td class="d-flex justify-content-around">
+                    <a asp-action="Upload" asp-route-id="@item.Id" class="btn btn-sm btn-info">Upload Receipt</a>
+
+                    <a asp-action="ViewPDF" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-warning">View Invoice</a>
+                    <a asp-action="ViewReceipt" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-warning">View Receipt</a>
                     <form asp-action="Download" method="post" asp-route-id="@item.Id" style="display:inline;">
                         <button type="submit" class="btn btn-sm btn-success">Download</button>
                     </form>
@@ -46,4 +53,3 @@
         }
     </tbody>
 </table>
- *@

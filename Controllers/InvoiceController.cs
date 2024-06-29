@@ -18,27 +18,35 @@ namespace wbl.Controllers
         // GET: Invoice
         public async Task<IActionResult> Index()
         {
+
+            var invoices = await _context.Invoicess
+                .Include(i => i.Child)
+                .ThenInclude(c => c.Programs)
+                .ToListAsync();
+
             return View(await _context.Invoicess.ToListAsync());
 
 
         }
 
         // GET: Invoice/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var invoice = await _context.Invoicess
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (invoice == null)
+            var child = await _context.tb_child
+                .Include(c => c.Programs)
+                .FirstOrDefaultAsync(m => m.ChildId == id);
+
+            if (child == null)
             {
                 return NotFound();
             }
 
-            return View(invoice);
+            return View(child);
         }
 
         // GET: Invoice/Create
@@ -231,6 +239,37 @@ namespace wbl.Controllers
             }
 
             return File(invoice.Attachment, "application/pdf");
+        }
+
+        public async Task<IActionResult> ViewReceipt(int id)
+        {
+            var invoice = await _context.Invoicess.FindAsync(id);
+            if (invoice == null || invoice.Receipt == null)
+            {
+                return NotFound();
+            }
+
+            return File(invoice.Receipt, "application/pdf");
+        }
+
+        public async Task<IActionResult> ChangeStatus(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var ChildPstatus = await _context.tb_child.FindAsync(id);
+            if (ChildPstatus == null)
+            {
+                return NotFound();
+            }
+
+            ChildPstatus.PaymentStatus = ChildPstatus.PaymentStatus == "Paid" ? "Unpaid" : "Paid";
+            _context.Update(ChildPstatus);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
 

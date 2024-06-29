@@ -9,12 +9,9 @@
 <table class="table table-bordered table-hover table-striped">
     <thead class="thead-dark">
         <tr>
-            @* <th>Child Name</th>
-            <th>Child IC</th>
-            <th>Child Program</th>
-            <th>Program Price</th>
-            <th>Child Payment Status</th> *@
+            
             <th>Invoice Name</th>
+            <th>Child Payment Status</th>
             <th>Invoice Date</th>
             <th>Action</th>
         </tr>
@@ -23,19 +20,17 @@
         @foreach (var item in Model)
         {
             <tr>
-            @*     <td>@Html.DisplayFor(modelItem => item.Child_Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Child_IC)</td>
-                <td>@Html.DisplayFor(modelItem => item.Programs.ProgramName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Programs.Price)</td>
-                <td>@Html.DisplayFor(modelItem => item.PaymentStatus)</td> *@
-                <td>@Html.DisplayFor(modelItem => item.InvoiceName)</td> 
+                
+                <td>@Html.DisplayFor(modelItem => item.InvoiceName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Child.PaymentStatus)</td>
                 <td>@Html.DisplayFor(modelItem => item.Date)</td>
 
                 
                 <td class="d-flex justify-content-around">
                     <a asp-action="Upload" asp-route-id="@item.Id" class="btn btn-sm btn-info">Upload</a>
 
-                        <a asp-action="ViewPDF" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-warning">View PDF</a>
+                        <a asp-action="ViewPDF" asp-route-id="@item.Id" target="_blank" class="btn btn-sm btn-warning">View Invoice</a>
+                    <a asp-action="Details" asp-route-id="@item.ChildId" target="_blank" class="btn btn-sm btn-warning">View Details</a>
                         <form asp-action="Download" method="post" asp-route-id="@item.Id" style="display:inline;">
                             <button type="submit" class="btn btn-sm btn-success">Download</button>
                         </form>

@@ -1,24 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MimeKit;
 using wbl.Data;
 using wbl.Models;
-using wbl.Models.ViewModels;
-
 
 namespace wbl.Controllers
 {
     public class ChildInvoiceController : Controller
     {
-
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<ChildInvoiceController> _logger;
@@ -28,29 +21,110 @@ namespace wbl.Controllers
             _context = context;
             _userManager = userManager;
             _logger = logger;
-          
-           
         }
-        public async Task<IActionResult> Index(string id)
+
+        public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-
             var parent = await _context.tb_parent1.FirstOrDefaultAsync(p => p.ApplicationUserId == user.Id);
 
+            
 
-            var statuses = new List<string> { "Pending", "Approved", "Rejected" };
-            var Pstatuses = new List<string> { "Paid", "Unpaid" };
-
-            var children = await _context.tb_child
-                .Include(c => c.Programs)
-                .Where(c => c.FatherIc == parent.FatherIc)
+            var invoices = await _context.Invoicess
+                .Include(i => i.Child)
+                .ThenInclude(c => c.Programs)
+                .Where(i => i.Child.FatherIc == parent.FatherIc)
                 .ToListAsync();
 
-            return View(children);
+            return View(invoices);
         }
-        private object GetCurrentParentId()
+
+
+
+        public async Task<IActionResult> Upload(int? id)
         {
-            throw new NotImplementedException();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var invoice = await _context.Invoicess.FindAsync(id);
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+
+            return View(invoice);
+        }
+
+        // POST: Invoice/Upload/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upload(int id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                ModelState.AddModelError("Attachment", "Please select a file.");
+                var invoiceWithError = await _context.Invoicess.FindAsync(id);
+                return View(invoiceWithError);
+            }
+
+            var invoice = await _context.Invoicess.FindAsync(id);
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.CopyToAsync(memoryStream);
+                invoice.Receipt = memoryStream.ToArray();
+                invoice.ReceiptContentType = file.ContentType; // Save the content type
+            }
+
+            _context.Update(invoice);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Download(int id)
+        {
+            var invoice = await _context.Invoicess.FindAsync(id);
+            if (invoice == null || invoice.Attachment == null)
+            {
+                return NotFound();
+            }
+
+            var fileName = $"Invoice_{invoice.InvoiceName}_Attachment.pdf";
+            return File(invoice.Attachment, "application/pdf", fileName);
+        }
+
+        public async Task<IActionResult> ViewPDF(int id)
+        {
+            var invoice = await _context.Invoicess.FindAsync(id);
+            if (invoice == null || invoice.Attachment == null)
+            {
+                return NotFound();
+            }
+
+            return File(invoice.Attachment, "application/pdf");
+        }
+
+
+        public async Task<IActionResult> ViewReceipt(int id)
+        {
+            var invoice = await _context.Invoicess.FindAsync(id);
+            if (invoice == null || invoice.Receipt == null)
+            {
+                return NotFound();
+            }
+
+            return File(invoice.Receipt, "application/pdf");
+        }
+        private bool InvoiceExists(int id)
+        {
+            return _context.Invoicess.Any(e => e.Id == id);
         }
 
     }
